@@ -8,8 +8,7 @@ var Olimpiada = Backbone.Model.extend({
 			VALOR: "N/A",
 			DESCRIPCION_TIPO: "N/A",
 			NUMERO_VECES_SEDE: "N/A"
-		}
-	}
-	
-	
+		}	
+	}	
 })
+
