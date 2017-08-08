@@ -3,12 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <title>JJOO app</title>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body>
+	<nav class="navbar navbar-default navbar-static-top">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="">JJOOapp</a><!--link-->
+	    </div>
 
+			<div class="collapse navbar-collapse">
+	     	<ul id="nav-item-container" class="nav navbar-nav">
+	     	</ul>
+		  </div><!--/.nav-collapse -->
+	  </div>
+	</nav>
+
+	<div id="contenido"></div><!--Punto de inserción de vistas-->
+
+
+	<!--Carga de librerías-->
+	<script src="../bower_components/jquery/dist/jquery.js"></script>
+	<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="../bower_components/jquery/dist/jquery.js"></script>
 	<script src="../bower_components/json2/json2.js"></script>
 	<script src="../bower_components/underscore/underscore.js"></script>
 	<script src="../bower_components/backbone/backbone.js"></script>
-	<script src="../js/main.js"></script>
+
+	<!--Variable necesaria-->
+	<script type="text/javascript">
+			//var CONTEXT_PATH = "${contextPath}";
+			var CONTEXT_PATH = "http://172.26.80.76:8080";
+	</script>
+
+	<!--Carga de scripts-->
+	<script src="../js/models/olimpiada.js"></script>
+	<script src="../js/collections/olimpiada.js"></script>
+	<script src="../js/views/olimpiadaCollection.js"></script>
+	<script src="../js/util/navBar.js"></script>
+	<script src="../js/util/router.js"></script>
+
 </body>
 </html>
