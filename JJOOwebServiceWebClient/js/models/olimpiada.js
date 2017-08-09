@@ -11,13 +11,13 @@ var OlimpiadaModel = Backbone.Model.extend({
 	 * Lista de atributos mínimos que tendrán todas las instancias de olimpiadaModel.
 	 */
 	defaults: {
-		id_ciudad : 999,
-		nombre_ciudad : 'N/A',
-		id_pais: 999,
-		nombre_pais : 'N/A',
-		valor: 999,
-		tipo_jjoo : 'N/A',
-		veces_sede : 999
+		ID_CIUDAD : 999,
+		NOMBRE_CIUDAD : 'N/A',
+		ID_PAIS: 999,
+		NOMBRE_PAIS : 'N/A',
+		VALOR: 999,
+		DESCRIPCION_TIPO : 'N/A',
+		NUMERO_VECES_SEDE : 999
 	}
 
 });

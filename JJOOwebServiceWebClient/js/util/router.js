@@ -10,27 +10,43 @@ var AppRouter = Backbone.Router.extend({
 		"sedes" : "sedes"
 	},
 
-  olimpiadasView: null,
+  olimpiadaCollectionView: null,
+
+	sedeCollectionView: null,
 
 	currentView : null,
 
 	initialize : function() {
-
     var olimpiadaCollection = new OlimpiadaCollection();
-		var olimpiadaCollectionTemplate = _.template(this.loadTemplate('olimpiadas', 'olimpiadaCollection'));
-		var olimpiadaModelTemplate = _.template(this.loadTemplate('olimpiadas', 'olimpiadaModel'));
+		var olimpiadaCollectionTemplate = _.template(this.loadTemplate('tablaOlimpiadas'));
+		var olimpiadaModelTemplate = _.template(this.loadTemplate('filaOlimpiada'));
 		this.olimpiadaCollectionView = new OlimpiadaCollectionView({
 			collection : olimpiadaCollection,
 			template : olimpiadaCollectionTemplate,
 			olimpiadaModelTemplate : olimpiadaModelTemplate
 		});
-  },
+
+		var sedeCollection = new SedeCollection();
+		var sedeCollectionTemplate = _.template(this.loadTemplate('tablaSedes'));
+		var sedeModelTemplate =  _.template(this.loadTemplate('filaSede'));
+		var editarSedeTemplate = _.template(this.loadTemplate('editarSede'));
+		this.sedeCollectionView = new SedeCollectionView({
+			collection : sedeCollection,
+			template : sedeCollectionTemplate,
+			editarSedeTemplate : editarSedeTemplate,
+			sedeModelTemplate : sedeModelTemplate
+		});
+
+	},
 
 	/**
 	 * Muestra la página de inicio
 	 */
 	index : function() {
 		this.changeView(this.olimpiadaCollectionView);
+	},
+	sedes : function(){
+		this.changeView(this.sedeCollectionView);
 	},
 
 	changeView : function(newView) {
@@ -49,7 +65,7 @@ var AppRouter = Backbone.Router.extend({
 	 * directorio web/static/js/libros/templates y utilizará como extensión del archivo ".tmpl"
 	 */
 	loadTemplate : function(name) {
-		var url = name + '.html';
+		var url = "templates/" + name + '.html';
 
 		var template = '';
 		$.ajax({

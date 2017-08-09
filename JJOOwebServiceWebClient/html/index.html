@@ -5,6 +5,7 @@
 <title>JJOO app</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" />
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top">
@@ -20,7 +21,10 @@
 	  </div>
 	</nav>
 
-	<div id="contenido"></div><!--Punto de inserción de vistas-->
+	<div class="container">
+		<div id="contenido"></div>
+		<div id="mensajes"></div>
+	</div><!--Punto de inserción de vistas-->
 
 
 	<!--Carga de librerías-->
@@ -37,10 +41,20 @@
 			var CONTEXT_PATH = "http://172.26.80.76:8080";
 	</script>
 
-	<!--Carga de scripts-->
+	<!--***Carga de scripts para backbone***-->
+	<!--Modelos-->
 	<script src="../js/models/olimpiada.js"></script>
+	<script src="../js/models/sede.js"></script>
+	<!--Collections-->
 	<script src="../js/collections/olimpiada.js"></script>
+	<script src="../js/collections/sede.js"></script>
+	<!--Views-->
 	<script src="../js/views/olimpiadaCollection.js"></script>
+	<script src="../js/views/sedeCollection.js"></script>
+	<script src="../js/views/olimpiadaModel.js"></script>
+	<script src="../js/views/editarSede.js"></script>
+	<script src="../js/views/sedeModel.js"></script>
+	<!--Otros-->
 	<script src="../js/util/navBar.js"></script>
 	<script src="../js/util/router.js"></script>
 
