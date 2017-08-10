@@ -30,11 +30,13 @@ var AppRouter = Backbone.Router.extend({
 		var sedeCollectionTemplate = _.template(this.loadTemplate('tablaSedes'));
 		var sedeModelTemplate =  _.template(this.loadTemplate('filaSede'));
 		var editarSedeTemplate = _.template(this.loadTemplate('editarSede'));
+		var nuevaSedeTemplate = _.template(this.loadTemplate('nuevaSede'));
 		this.sedeCollectionView = new SedeCollectionView({
 			collection : sedeCollection,
 			template : sedeCollectionTemplate,
 			editarSedeTemplate : editarSedeTemplate,
-			sedeModelTemplate : sedeModelTemplate
+			sedeModelTemplate : sedeModelTemplate,
+			nuevaSedeTemplate : nuevaSedeTemplate
 		});
 
 	},

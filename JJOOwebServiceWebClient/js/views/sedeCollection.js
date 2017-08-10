@@ -11,6 +11,8 @@ var SedeCollectionView = Backbone.View.extend({
 	 */
 	template : null,
 
+	nuevaSedeTemplate : null,
+
 	editarSedeTemplate : null,
 	/**
 	 * Plantilla html asociada a la vista de un sede individual
@@ -20,6 +22,10 @@ var SedeCollectionView = Backbone.View.extend({
 	 * Información de los sedes
 	 */
 	sedeCollection : null,
+
+	events : {
+		"click #botonNuevo" : "nuevaSede"
+	},
 
 	/**
 	 * Inicializador de la clase. Establece los atributos collection, template, sedeModelTemplate
@@ -33,6 +39,7 @@ var SedeCollectionView = Backbone.View.extend({
 		this.sedeModelTemplate = options.sedeModelTemplate;
 		this.sedeCollection = options.collection;
 		this.editarSedeTemplate = options.editarSedeTemplate;
+		this.nuevaSedeTemplate = options.nuevaSedeTemplate;
 		this.listenTo(this.sedeCollection, 'reset', this.render);
 		this.listenTo(this.collection, 'destroy', this.renderCollection);
 		this.listenTo(this.collection, 'change', this.renderCollection);
@@ -68,6 +75,33 @@ var SedeCollectionView = Backbone.View.extend({
 		this.sedeCollection.fetch({
 			success : _.bind(success, this),
 			error : _.bind(error, this)
+		});
+	},
+
+	nuevaSede : function () {
+		//Esto debería ser una tarea asíncrona compuesta. Investigar más adelante
+		var url1 = CONTEXT_PATH + '/ciudades/nombres';
+		var templateAux = this.nuevaSedeTemplate;
+		Backbone.ajax({
+			url: url1,
+    	type: 'GET',
+			success: function(result) {
+				var url2 = CONTEXT_PATH + '/tipoJJOO/descripciones';
+				var ciudades = result
+				var template = templateAux
+				Backbone.ajax({
+					url : url2,
+					type : 'GET',
+					success : function(result){
+						this.nuevaSedeView = new NuevaSedeView({
+							template : template,
+							ciudades : ciudades,
+							tipos : result
+						})
+						this.nuevaSedeView.render()
+					}
+				})
+			}
 		});
 	},
 

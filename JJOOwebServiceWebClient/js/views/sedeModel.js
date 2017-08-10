@@ -66,7 +66,6 @@ var SedeModelView = Backbone.View.extend({
 				this.editarSedeView.render();
 			}
 		});
-		//Esto siguiente va en una funcion dentro de success
 
 	},
 	/**

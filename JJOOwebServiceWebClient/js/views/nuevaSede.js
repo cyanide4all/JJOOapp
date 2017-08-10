@@ -1,21 +1,22 @@
 
-var EditarSedeView = Backbone.View.extend({
+var NuevaSedeView = Backbone.View.extend({
 
 	/**
 	 * Punto de enganche en el árbol dom
 	 */
 	el : $('#mensajes'),
-	modal : '#EditarSede',
+	modal : '#NuevaSede',
 	comboCiudades : "#comboCiudades",
+  comboTipos : "#comboTipos",
+	inputAnyo : "#anyoInput",
 
-	/**
-	 * Sede mostrado y (posiblemente) actualizado.
-	 */
-	sede : null,
+  ciudades : null,
+
+  tipos : null,
 
 	events : {
-		"click #botonModificar" : "modificarModelo",
-		"hidden.bs.modal #EditarSede" : "destroy"
+		"click #botonAceptar" : "nuevoModelo",
+		"hidden.bs.modal #NuevaSede" : "destroy"
 	},
 
 	/**
@@ -25,9 +26,9 @@ var EditarSedeView = Backbone.View.extend({
 	 *            Es un hash con un único elemento {editarSedeTemplate: plantilla}
 	 */
 	initialize : function(options) {
-		this.template = options.editarSedeTemplate;
-		this.sede = options.sede;
+		this.template = options.template;
 		this.ciudades = options.ciudades;
+    this.tipos = options.tipos;
 	},
 
 	/**
@@ -36,16 +37,14 @@ var EditarSedeView = Backbone.View.extend({
 	 * @return Devuelve la instancia sobre la que se ejecuta la función.
 	 */
 	render : function() {
-		this.$el.html(this.template(this.sede.toJSON()));
+		this.$el.html(this.template());
 
 		for (i = 0; i < this.ciudades.length; i++){
-			if(this.ciudades[i] == this.sede.attributes.NOMBRE_CIUDAD){
-				$(this.comboCiudades).append("<option value='"+i+"' selected>"+this.ciudades[i]+"</option>")
-			}else{
 				$(this.comboCiudades).append("<option value='"+i+"'>"+this.ciudades[i]+"</option>")
-			}
 		}
-
+		for (i = 0; i < this.tipos.length; i++){
+				$(this.comboTipos).append("<option value='"+i+"'>"+this.tipos[i]+"</option>")
+		}
 		$(this.modal).modal();
 		return this;
 	},
@@ -61,27 +60,30 @@ var EditarSedeView = Backbone.View.extend({
 		$(this.modal).remove();
 	},
 
-	modificarModelo : function() {
-		var url = CONTEXT_PATH + '/sedes/' + this.sede.attributes.ANYO + '/' + this.sede.attributes.ID_TIPO_JJOO;
-		var data = parseInt($(this.comboCiudades).find('option:selected').val())+1;
-		var nuevaSede = $(this.comboCiudades).find('option:selected').text();
-		var sede = this.sede;
+	nuevoModelo : function() {
+		var url = CONTEXT_PATH + '/sedes';
+		var id_ciudad = parseInt($(this.comboCiudades).find('option:selected').val())+1;
+		var id_tipo = parseInt($(this.comboTipos).find('option:selected').val())+1;
+		var anyo = parseInt($(this.inputAnyo).val());
+		var data = [anyo, id_tipo, id_ciudad]
 		Backbone.ajax({
 			url: url,
 			headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     	},
-			method: 'PUT',
+			method: 'POST',
 			data: JSON.stringify(data),
 			success: function(result) {
-				//Workaroud innecesario pero funcional
-				sede.set({ "NOMBRE_CIUDAD": nuevaSede})
-				/*//ideal, pero no funciona:
-				console.log(sede.trigger('change', sede));
-				*/
+				alert("huehuehue")//TODO hacer un trigger aqui de algo
 			}
 		});
-		$(this.modal).modal('toggle');
+		$(this.modal).modal('hide');
+		/*//PARA PILLAR ID_CIUDAD
+		alert(parseInt($(this.comboCiudades).find('option:selected').val())+1)
+		*/
+		/*//PARA PILLAR NOMBRE_CIUDAD
+		$(this).find('option:selected').text();
+		*/
 	}
 });
