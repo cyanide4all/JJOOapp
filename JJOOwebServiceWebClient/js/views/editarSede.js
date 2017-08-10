@@ -5,7 +5,8 @@ var EditarSedeView = Backbone.View.extend({
 	 * Punto de enganche en el árbol dom
 	 */
 	el : $('#mensajes'),
-	modal : '#editarSede',
+	modal : '#EditarSede',
+	comboCiudades : "#comboCiudades",
 
 	/**
 	 * Sede mostrado y (posiblemente) actualizado.
@@ -26,6 +27,7 @@ var EditarSedeView = Backbone.View.extend({
 	initialize : function(options) {
 		this.template = options.editarSedeTemplate;
 		this.sede = options.sede;
+		this.ciudades = options.ciudades;
 	},
 
 	/**
@@ -35,6 +37,15 @@ var EditarSedeView = Backbone.View.extend({
 	 */
 	render : function() {
 		this.$el.html(this.template(this.sede.toJSON()));
+
+		for (i = 0; i < this.ciudades.length; i++){
+			if(this.ciudades[i] == this.sede.attributes.NOMBRE_CIUDAD){
+				$(this.comboCiudades).append("<option value='"+i+"' selected>"+this.ciudades[i]+"</option>")
+			}else{
+				$(this.comboCiudades).append("<option value='"+i+"'>"+this.ciudades[i]+"</option>")
+			}
+		}
+
 		$(this.modal).modal();
 		return this;
 	},
@@ -51,10 +62,28 @@ var EditarSedeView = Backbone.View.extend({
 	},
 
 	modificarModelo : function() {
-		this.sede.set({"titulo": $('#tituloInput').val(), "autor" : $('#autorInput').val()})
-		//this.sede.titulo = $('#tituloInput').val();
-		//this.sede.autor = $('#autorInput').val();
-		this.sede.save();
-		$(this.modal).modal('toggle');
+		var url = CONTEXT_PATH + '/sedes/' + this.sede.attributes.ANYO + '/' + this.sede.attributes.ID_TIPO_JJOO;
+		var data = parseInt($(this.comboCiudades).find('option:selected').val())+1;
+		var nuevaSede = $(this.comboCiudades).find('option:selected').text();
+		var sede = this.sede;
+		Backbone.ajax({
+			url: url,
+			headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    	},
+			method: 'PUT',
+			data: JSON.stringify(data),
+			success: function(result) {
+				sede.set({ "NOMBRE_CIUDAD": nuevaSede})
+			}
+		});
+		$(this.modal).modal('hide');
+		/*//PARA PILLAR ID_CIUDAD
+		alert(parseInt($(this.comboCiudades).find('option:selected').val())+1)
+		*/
+		/*//PARA PILLAR NOMBRE_CIUDAD
+		$(this).find('option:selected').text();
+		*/
 	}
 });

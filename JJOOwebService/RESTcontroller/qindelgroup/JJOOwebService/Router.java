@@ -20,13 +20,13 @@ public class Router {
     	MasterDAO masterDAO = new MasterDAO();
     	return masterDAO.getCiudadesCompleto();
     }
-    
+
     @RequestMapping(value="/sedes", method=RequestMethod.GET)
     public ArrayList<HashMap<String, String>> getSedes(){
     	SedeDAO sedesDAO = new SedeDAO();
     	return sedesDAO.getSedes();
     }
-    
+
     @RequestMapping(value="tipoJJOO/descripciones", method=RequestMethod.GET)
     public String[] getDescripcionesTipoJJOO() {
     	TipoJJOODAO tipoJJOODAO = new TipoJJOODAO();
@@ -42,24 +42,24 @@ public class Router {
     	SedeDAO sedeDAO = new SedeDAO();
     	return sedeDAO.getByAnyoTipo(anyo, id_tipo);
     }
-    
+
     @RequestMapping(value="/sedes/{anyo}/{id_tipo}", method=RequestMethod.DELETE)
     public void deleteSedes(@PathVariable("anyo") int anyo, @PathVariable("id_tipo") int id_tipo) {
     	SedeDAO sedesDAO = new SedeDAO();
     	sedesDAO.deleteSede(anyo, id_tipo);
     }
-    
+
     @RequestMapping(value="/sedes/{anyo}/{id_tipo}", method=RequestMethod.PUT)
     public void updateSedes(@PathVariable("anyo") int anyo, @PathVariable("id_tipo") int id_tipo, @RequestBody int id_ciudad) {
     	SedeDAO sedesDAO = new SedeDAO();
     	sedesDAO.updateSede(anyo, id_tipo, id_ciudad);
     }
-    
+
     @RequestMapping(value="/sedes", method=RequestMethod.POST)
     public void createSedes(@RequestBody int[] data) {
     	SedeDAO sedesDAO = new SedeDAO();
     	sedesDAO.insertNuevaSede(data[0], data[1], data[2]);
     }
 
-    
+
 }

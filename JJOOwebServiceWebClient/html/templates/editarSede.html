@@ -1,1 +1,26 @@
-HEUHEUHEUEUEHEUHEUHEUEHUEHUHEUHUEHUEHUE
+<div id="EditarSede" class="modal fade" tabindex="-1" role="dialog"
+	aria-labelledby="editarSedeLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 id="editarSedeLabel">Editar Sede</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					Usa el siguiente formulario para modificar los valores necesarios:<br><br>
+					<label for="anyoInput">Año:</label>
+					<input id="anyoInput" class="form-control" type=text value="<%=ANYO%>" readonly><br>
+					<label for="tipoInput">Tipo de juegos:</label>
+					<input id="tipoInput" class="form-control" type=text  value="<%=DESCRIPCION_TIPO%>" readonly><br>
+					<label for="comboCiudades">Sede:</label>
+					<select id="comboCiudades" class="form-control"></select>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<button id="botonModificar" type="button" class="btn btn-primary">Aceptar</button>
+			</div>
+		</div>
+	</div>
+</div>

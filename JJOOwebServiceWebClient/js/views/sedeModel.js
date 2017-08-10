@@ -43,7 +43,6 @@ var SedeModelView = Backbone.View.extend({
 				modelo.destroy();
 			}
 		});
-
 	},
 
 	editar : function(event) {
@@ -51,11 +50,24 @@ var SedeModelView = Backbone.View.extend({
 		if (this.editarSedeView) {
 			this.editarSedeView.destroy();
 		}
-		this.editarSedeView = new EditarSedeView({
-			editarSedeTemplate : this.editarSedeTemplate,
-			sede : this.model
+
+		var url = CONTEXT_PATH + '/ciudades/nombres';
+		var editarSedeTemplate = this.editarSedeTemplate
+		var model = this.model
+		Backbone.ajax({
+			url: url,
+    	type: 'GET',
+			success: function(result) {
+				this.editarSedeView = new EditarSedeView({
+					editarSedeTemplate : editarSedeTemplate,
+					sede : model,
+					ciudades : result
+				});
+				this.editarSedeView.render();
+			}
 		});
-		this.editarSedeView.render();
+		//Esto siguiente va en una funcion dentro de success
+
 	},
 	/**
 	 * Crea un nodo dom con la plantilla html y los datos del país (this.model).
