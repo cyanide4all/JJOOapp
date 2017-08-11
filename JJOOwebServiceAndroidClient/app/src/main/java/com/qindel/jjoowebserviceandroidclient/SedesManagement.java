@@ -1,4 +1,4 @@
-package com.qindel.jjoowebserviceandroidclient;
+﻿package com.qindel.jjoowebserviceandroidclient;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -126,7 +126,7 @@ public class SedesManagement extends AppCompatActivity {
                                 });
                         // Create the AlertDialog object and return it
                         builder.create().show();
-                        return false;
+                        return true;
                     }
                 });
                 lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
