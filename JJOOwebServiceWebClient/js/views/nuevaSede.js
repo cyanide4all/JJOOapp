@@ -29,6 +29,7 @@ var NuevaSedeView = Backbone.View.extend({
 		this.template = options.template;
 		this.ciudades = options.ciudades;
     this.tipos = options.tipos;
+		this.collection = options.collection;
 	},
 
 	/**
@@ -66,6 +67,7 @@ var NuevaSedeView = Backbone.View.extend({
 		var id_tipo = parseInt($(this.comboTipos).find('option:selected').val())+1;
 		var anyo = parseInt($(this.inputAnyo).val());
 		var data = [anyo, id_tipo, id_ciudad]
+		var collection = this.collection
 		Backbone.ajax({
 			url: url,
 			headers: {
@@ -75,7 +77,7 @@ var NuevaSedeView = Backbone.View.extend({
 			method: 'POST',
 			data: JSON.stringify(data),
 			success: function(result) {
-				alert("huehuehue")//TODO hacer un trigger aqui de algo
+				collection.render();//TODO hacer un trigger aqui de algo
 			}
 		});
 		$(this.modal).modal('hide');

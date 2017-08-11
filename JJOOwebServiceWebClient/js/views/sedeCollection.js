@@ -81,22 +81,23 @@ var SedeCollectionView = Backbone.View.extend({
 	nuevaSede : function () {
 		//Esto debería ser una tarea asíncrona compuesta. Investigar más adelante
 		var url1 = CONTEXT_PATH + '/ciudades/nombres';
-		var templateAux = this.nuevaSedeTemplate;
+		var aux = this
 		Backbone.ajax({
 			url: url1,
     	type: 'GET',
 			success: function(result) {
 				var url2 = CONTEXT_PATH + '/tipoJJOO/descripciones';
 				var ciudades = result
-				var template = templateAux
+				var self  = aux
 				Backbone.ajax({
 					url : url2,
 					type : 'GET',
 					success : function(result){
 						this.nuevaSedeView = new NuevaSedeView({
-							template : template,
+							template : self.nuevaSedeTemplate,
 							ciudades : ciudades,
-							tipos : result
+							tipos : result,
+							collection : self //Esto hay que mirarlo bien porque mejor sería mandar solo render
 						})
 						this.nuevaSedeView.render()
 					}
