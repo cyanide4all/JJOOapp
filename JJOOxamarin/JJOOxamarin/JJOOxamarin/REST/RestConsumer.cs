@@ -1,5 +1,6 @@
 ﻿using Java.IO;
 using Java.Util;
+using JJOOxamarin.model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,14 @@ namespace JJOOxamarin.REST
     {
         private static String baseRestURL = "http://172.26.80.76:8080/";
 
-        public static async Task<List<Dictionary<string, string>>> GetCiudadesCompleto()
+        public static async Task<List<Olimpiada>> GetCiudadesCompleto()
         {
-            List<Dictionary<String, String>> toret = null;
+            List<Olimpiada> toret = null;
             toret = await GetResource("olimpiadas");
             return toret;
         }
 
-        private static async Task<List<Dictionary<String,String>>> GetResource(string v)
+        private static async Task<List<Olimpiada>> GetResource(string v)
         {
             HttpClient client = new HttpClient();
             var uri = new Uri(baseRestURL+v);
@@ -29,10 +30,10 @@ namespace JJOOxamarin.REST
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var toret = JsonConvert.DeserializeObject<List<Dictionary<String, String>>>(content);
+                var toret = JsonConvert.DeserializeObject<List<Olimpiada>>(content);
                 return toret;
             }
-            return new List<Dictionary<String, String>>();
+            return new List<Olimpiada>();
         }
     }
 }

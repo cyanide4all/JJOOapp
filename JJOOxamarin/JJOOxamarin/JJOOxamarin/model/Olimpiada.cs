@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JJOOxamarin.model
 {
-    class Olimpiada
+    public class Olimpiada
     {
         public int id_ciudad { get; private set; }
         public int id_pais { get; private set; }

@@ -30,7 +30,7 @@ namespace JJOOxamarin.Droid
             tv = FindViewById<TextView>(Resource.Id.texto);
 
             var data = await RestConsumer.GetCiudadesCompleto();
-            tv.Text = data[0]["ID_CIUDAD"];
+            tv.Text = data[0].nombre_ciudad;
         }
     }
 }
