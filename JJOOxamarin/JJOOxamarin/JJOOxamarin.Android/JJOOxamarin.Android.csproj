@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SedesManagement.cs" />
     <Compile Include="views\OlimpiadaAdapter.cs" />
+    <Compile Include="views\SedesAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -64,6 +65,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\SedesManagement.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SedeView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
