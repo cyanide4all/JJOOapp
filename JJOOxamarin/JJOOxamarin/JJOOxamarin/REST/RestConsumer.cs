@@ -22,6 +22,12 @@ namespace JJOOxamarin.REST
             return toret;
         }
 
+        public static Task<List<Sede>> GetSedes()
+        {
+            List<Sede> toret = null;
+            return null;
+        }
+
         private static async Task<List<Olimpiada>> GetResource(string v)
         {
             HttpClient client = new HttpClient();
@@ -35,5 +41,6 @@ namespace JJOOxamarin.REST
             }
             return new List<Olimpiada>();
         }
+
     }
 }

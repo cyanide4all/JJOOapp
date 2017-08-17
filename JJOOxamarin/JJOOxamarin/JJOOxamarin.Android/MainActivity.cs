@@ -8,13 +8,15 @@ using Android.Widget;
 using Android.OS;
 using JJOOxamarin.REST;
 using System.Threading.Tasks;
+using JJOOxamarin.Droid.views;
 
 namespace JJOOxamarin.Droid
 {
 	[Activity (Label = "JJOOxamarin.Android", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-        private TextView tv;
+        private ListView lista;
+        private Button botonSedes;
 
         protected override void OnCreate (Bundle bundle)
 		{
@@ -22,15 +24,29 @@ namespace JJOOxamarin.Droid
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-            initializeAsync();
+
+            lista = FindViewById<ListView>(Resource.Id.lista);
+            botonSedes = FindViewById<Button>(Resource.Id.button1);
+
+            botonSedes.Click += BotonSedes_Click;
+
+            #pragma warning disable CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
+            InitializeAsync();
+            #pragma warning restore CS4014 // Ya que no se esperaba esta llamada, la ejecución del método actual continúa antes de que se complete la llamada
         }
 
-        private async Task initializeAsync()
+        private void BotonSedes_Click(object sender, EventArgs e)
         {
-            tv = FindViewById<TextView>(Resource.Id.texto);
+            StartActivity(typeof(SedesManagement));
+        }
 
+        private async Task InitializeAsync()
+        {            
+            //Await bloquea el hilo asincrono hasta la respuesta
             var data = await RestConsumer.GetCiudadesCompleto();
-            tv.Text = data[0].nombre_ciudad;
+
+            //Inicializa y renderiza la lista
+            lista.Adapter = new OlimpiadasAdapter(this, data);
         }
     }
 }

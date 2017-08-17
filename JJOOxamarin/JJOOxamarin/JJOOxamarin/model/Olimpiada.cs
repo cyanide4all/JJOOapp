@@ -16,14 +16,14 @@ namespace JJOOxamarin.model
         public String descripcion_tipo_jjoo { get; private set; }
         public int numero_veces_sede { get; private set; }
 
-        public Olimpiada(int id_ciudad, int id_pais, int valor, string nombre_ciudad, string nombre_pais, string descripcion_tipo_jjoo, int numero_veces_sede)
+        public Olimpiada(int id_ciudad, int id_pais, int valor, string nombre_ciudad, string nombre_pais, string descripcion_tipo, int numero_veces_sede)
         {
             this.id_ciudad = id_ciudad;
             this.id_pais = id_pais;
             this.valor = valor;
             this.nombre_ciudad = nombre_ciudad;
             this.nombre_pais = nombre_pais;
-            this.descripcion_tipo_jjoo = descripcion_tipo_jjoo;
+            this.descripcion_tipo_jjoo = descripcion_tipo;
             this.numero_veces_sede = numero_veces_sede;
         }
     }
