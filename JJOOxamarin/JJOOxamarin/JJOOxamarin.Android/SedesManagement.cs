@@ -36,7 +36,7 @@ namespace JJOOxamarin.Droid
         private async Task InitializeAsync()
         {
             //Await bloquea el hilo asincrono hasta la respuesta
-            var data = await RestConsumer.GetSedes();
+            var data = await RestConsumer.GetSedesAsync();
 
             //Inicializa y renderiza la lista
             //lista.Adapter = new SedesAdapter(this, data);

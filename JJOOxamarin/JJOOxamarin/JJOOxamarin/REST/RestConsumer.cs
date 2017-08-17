@@ -18,17 +18,18 @@ namespace JJOOxamarin.REST
         public static async Task<List<Olimpiada>> GetCiudadesCompleto()
         {
             List<Olimpiada> toret = null;
-            toret = await GetResource("olimpiadas");
+            toret = await GetResource<Olimpiada>("olimpiadas");
             return toret;
         }
 
-        public static Task<List<Sede>> GetSedes()
+        public static async Task<List<Sede>> GetSedesAsync()
         {
             List<Sede> toret = null;
+            toret = await GetResource<Sede>("sedes");
             return null;
         }
 
-        private static async Task<List<Olimpiada>> GetResource(string v)
+        private static async Task<List<T>> GetResource<T>(string v)
         {
             HttpClient client = new HttpClient();
             var uri = new Uri(baseRestURL+v);
@@ -36,10 +37,10 @@ namespace JJOOxamarin.REST
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var toret = JsonConvert.DeserializeObject<List<Olimpiada>>(content);
+                var toret = JsonConvert.DeserializeObject<List<T>>(content);
                 return toret;
             }
-            return new List<Olimpiada>();
+            return new List<T>();
         }
 
     }
