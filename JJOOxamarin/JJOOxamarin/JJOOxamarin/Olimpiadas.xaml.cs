@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JJOOxamarin.model;
+using JJOOxamarin.REST;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,13 @@ namespace JJOOxamarin
         public Olimpiadas()
         {
             InitializeComponent();
+            InitializeAsync();
+            //TODO instanciar los stacklayout desde aqui para evitar el resizing
+        }
+
+        private async void InitializeAsync()
+        {
+            OlimpiadasList.ItemsSource = await RestConsumer.GetCiudadesCompleto();
         }
     }
 }

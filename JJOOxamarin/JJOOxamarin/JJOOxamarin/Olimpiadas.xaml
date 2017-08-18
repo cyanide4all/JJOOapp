@@ -1,10 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JJOOxamarin.Olimpiadas">
-    <ContentPage.Content>
+             x:Class="JJOOxamarin.Olimpiadas"
+             Title="Olimpiadas">
+    <ContentPage.Content BackgroundColor="#eee">
         <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+            <ListView x:Name="OlimpiadasList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="10" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding id_ciudad}" TextColor="#f35e20" />
+                                    <Label Text="{Binding nombre_ciudad}" TextColor="#f35e20" />
+                                    <Label Text="{Binding id_pais }"  HorizontalOptions="EndAndExpand" TextColor="#503026" />
+                                    <Label Text="{Binding nombre_pais}" TextColor="#503026" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Valor: " TextColor="#f35e20" />
+                                    <Label Text="{Binding valor}" TextColor="#f35e20" />
+                                    <Label Text="veces sede"  HorizontalOptions="EndAndExpand" TextColor="#503026" />
+                                    <Label Text="{Binding numero_veces_sede}" TextColor="#503026" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
