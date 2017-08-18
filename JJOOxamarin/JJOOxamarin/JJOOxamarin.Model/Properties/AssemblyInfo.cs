@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("JJOOxamarin")]
+[assembly: AssemblyTitle("JJOOxamarin.Model")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("JJOOxamarin")]
+[assembly: AssemblyProduct("JJOOxamarin.Model")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9404b4e0-6aa3-45ac-a364-7555c83e0426")]
+[assembly: Guid("0d6e1326-9622-41b0-8159-778d646b58d2")]
 
 // Version information for an assembly consists of the following four values:
 //

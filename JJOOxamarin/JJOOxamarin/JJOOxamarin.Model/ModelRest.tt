@@ -1,0 +1,98 @@
+﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ include file="MultiOutput.tt" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Runtime" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="Microsoft.VisualStudio.OLE.Interop" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop.8.0" #>
+<#@ assembly name="$(ProjectDir)libs\NJsonSchema.dll" #>
+<#@ assembly name="$(ProjectDir)libs\NJsonSchema.CodeGeneration.dll" #>
+<#@ assembly name="$(ProjectDir)libs\Newtonsoft.Json.dll" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.Specialized" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="NJsonSchema" #>
+<#@ import namespace="NJsonSchema.CodeGeneration.CSharp" #>
+<#  
+    // ------------------------------------------Configuración----------------------------------------------------
+    // De forma defectiva en false, si se detecta que existen colisiones en la generación de diferentes schemas
+    // activar a true el campo para que cada scheam complejo sea generado en un namespace diferente.
+    bool MultiNamespace = false;
+
+    // De forma defectiva en false, si se quiere forzar a regenerar todo, incluido las clases que se pueden 
+    // modificar activara true. Esto es útil por si se detecta un error al principio de las generaciones.
+    bool overwriteAll = true;
+    // -----------------------------------------------------------------------------------------------------------
+
+    // Cada vez que se intenta escribir se elimina todo le contenido que quede en el buffer.
+    // Esto evita línea en blanco no deseadas.
+    this.GenerationEnvironment = new StringBuilder();
+
+    string namespaceName = GetDefaultNameSpace();
+
+    // Se filtran los archivos de los schemas que nos interesa
+	Project project = TemplateProject();
+	IEnumerable<ProjectItem> projectItems = project.ProjectItems.OfType<ProjectItem>();
+
+    // Esta es la configuración que se va a usar par generar las clases a partir de los schemas
+    var settings = new CSharpGeneratorSettings
+            {
+                Namespace = namespaceName,
+                ClassStyle = CSharpClassStyle.Poco,
+                GenerateDefaultValues = true,
+                NullHandling = NullHandling.JsonSchema,
+                RequiredPropertiesMustBeDefined = true,
+            };
+
+    StringCollection files = new StringCollection();
+
+    foreach (EnvDTE.ProjectItem item in projectItems) 
+    {
+        if (item.Name.EndsWith(".json"))
+        {
+            files.Add((string)item.Properties.Item("FullPath").Value);
+        }
+
+        foreach (EnvDTE.ProjectItem subitem in item.ProjectItems)
+        {
+            if (subitem.Name.EndsWith(".json"))
+            {
+                files.Add((string)subitem.Properties.Item("FullPath").Value);
+            }
+        }
+    }
+
+    foreach (string path in files)
+    {
+        string name = Path.GetFileNameWithoutExtension(path);
+        string file = File.ReadAllText(path);
+        JsonSchema4 schema = JsonSchema4.FromJson(file);
+
+        if (MultiNamespace)
+        {
+            settings.Namespace = namespaceName + "." + name;
+        }
+
+        CSharpGenerator generator = new CSharpGenerator(schema, settings);
+        generator.GenerateType(name);
+        string output = generator.GenerateFile();
+#>
+namespace <#=GetDefaultNameSpace()#>
+{
+	public partial class <#=name#>
+	{
+    }
+}
+<#
+        SaveOutput(name + ".cs", overwriteAll);
+        this.GenerationEnvironment = new StringBuilder(output);
+        SaveOnNestedItem(name + ".Generated.cs");
+        MoveToNestedItem(name + ".cs", path);
+    }
+#>
