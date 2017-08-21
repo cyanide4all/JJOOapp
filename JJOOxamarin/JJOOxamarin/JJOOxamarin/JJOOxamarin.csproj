@@ -36,6 +36,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ManageSedes.xaml.cs">
+      <DependentUpon>ManageSedes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Olimpiadas.xaml.cs">
       <DependentUpon>Olimpiadas.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Olimpiadas.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ManageSedes.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JJOOxamarin.ManageSedes"
+             Title="Sedes">
+    <ContentPage.Content BackgroundColor="#eee">
+        <StackLayout>
+            <ListView x:Name="SedesList" RowHeight="80">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Tapped="ViewCell_Tapped">
+                            <StackLayout Margin="10" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Año " TextColor="#0673d3" />
+                                    <Label Text="{Binding anyo}" TextColor="#0673d3" />
+                                    <Label Text="{Binding nombre_ciudad }"  HorizontalOptions="EndAndExpand" TextColor="#503026" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Juegos Olímpicos de: " TextColor="#0673d3" />
+                                    <Label Text="{Binding descripcion_tipo }"  HorizontalOptions="EndAndExpand" TextColor="#503026" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="NuevaSedeButon" Text="Nueva Sede" Clicked="NuevaSede" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

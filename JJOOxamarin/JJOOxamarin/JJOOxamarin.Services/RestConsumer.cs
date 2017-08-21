@@ -18,11 +18,11 @@ namespace JJOOxamarin.REST
             return toret;
         }
 
-        public static async Task<List<Sede>> GetSedesAsync()
+        public static async Task<List<Sede>> GetSedes()
         {
             List<Sede> toret = null;
             toret = await GetResource<Sede>("sedes");
-            return null;
+            return toret;
         }
 
         private static async Task<List<T>> GetResource<T>(string v)

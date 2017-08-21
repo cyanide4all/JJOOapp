@@ -25,5 +25,10 @@ namespace JJOOxamarin
         {
             OlimpiadasList.ItemsSource = await RestConsumer.GetCiudadesCompleto();
         }
+
+        async void GestionarSedes(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ManageSedes());
+        }
     }
 }
