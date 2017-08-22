@@ -8,7 +8,10 @@
             <ListView x:Name="SedesList" RowHeight="80">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Tapped="ViewCell_Tapped">
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+                            </ViewCell.ContextActions>
                             <StackLayout Margin="10" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Año " TextColor="#0673d3" />

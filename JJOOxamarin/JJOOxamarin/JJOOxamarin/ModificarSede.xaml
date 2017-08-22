@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JJOOxamarin.ModificarSede"
+             Title="Modificar esta sede">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="20" VerticalOptions="FillAndExpand">
+                <Label Text="Año" />
+                <Label x:Name="anyoLabel" TextColor="#0673d3"/>
+                <Label Text="Tipo de juego" />
+                <Label x:Name="tipoJJOOLabel" TextColor="#0673d3"/>
+                <Label Text="Ciudad" />
+                <Picker x:Name="pickerCiudades" Title="Selecciona una ciudad"/>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="botonModificar" Text="Modificar"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

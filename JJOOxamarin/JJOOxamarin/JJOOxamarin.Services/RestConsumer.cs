@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace JJOOxamarin.REST
@@ -24,6 +26,31 @@ namespace JJOOxamarin.REST
             toret = await GetResource<Sede>("sedes");
             return toret;
         }
+
+        public static async Task<List<String>> GetNombresCiudades()
+        {
+            List<String> toret = null;
+            toret = await GetResource<String>("ciudades/nombres");
+            return toret;
+        }
+
+        public static async Task DeleteSede(Sede sede)
+        {
+            HttpClient client = new HttpClient();
+            var uri = baseRestURL +"sedes/"+ sede.anyo + "/" + sede.tipo_jjoo;
+            await client.DeleteAsync(uri);
+        }
+
+        public static async Task UpdateSede(Sede sede, int nuevaIdCiudad)
+        {
+            HttpClient client = new HttpClient();
+            var uri = baseRestURL + "sedes/" + sede.anyo + "/" + sede.tipo_jjoo;
+            var json = JsonConvert.SerializeObject(nuevaIdCiudad);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            Debug.WriteLine("----------------------------------------------------------------------" + content);
+            await client.PutAsync(uri, content);
+        }
+
 
         private static async Task<List<T>> GetResource<T>(string v)
         {
