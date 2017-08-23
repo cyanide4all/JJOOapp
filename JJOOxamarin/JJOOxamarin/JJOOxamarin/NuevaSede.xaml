@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JJOOxamarin.NuevaSede"
+             Title="Crear nueva sede">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="20" VerticalOptions="FillAndExpand">
+                <Label Text="Año"/>
+                <Entry x:Name="anyoInput" Placeholder="Año de realización" Keyboard="Numeric"/>
+                <Label Text="Tipo de juego" />
+                <Picker x:Name="pickerTipoJuego" Title="Selecciona el tipo de juegos"/>
+                <Label Text="Ciudad" />
+                <Picker x:Name="pickerCiudades" Title="Selecciona una ciudad"/>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="botonNuevo" Text="Nuevo"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

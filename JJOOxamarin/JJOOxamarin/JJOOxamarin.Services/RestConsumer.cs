@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace JJOOxamarin.REST
 {
@@ -24,6 +25,13 @@ namespace JJOOxamarin.REST
         {
             List<Sede> toret = null;
             toret = await GetResource<Sede>("sedes");
+            return toret;
+        }
+
+        public static async Task<List<String>> GetDescripcionesTipoJJOO()
+        {
+            List<String> toret = null;
+            toret = await GetResource<String>("tipoJJOO/descripciones");
             return toret;
         }
 
@@ -47,8 +55,16 @@ namespace JJOOxamarin.REST
             var uri = baseRestURL + "sedes/" + sede.anyo + "/" + sede.tipo_jjoo;
             var json = JsonConvert.SerializeObject(nuevaIdCiudad);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            Debug.WriteLine("----------------------------------------------------------------------" + content);
             await client.PutAsync(uri, content);
+        }
+
+        public static async Task CreateSede(int anyo, int idTipo, int idCiudad)
+        {
+            HttpClient client = new HttpClient();
+            var uri = baseRestURL + "sedes";
+            var json = JsonConvert.SerializeObject(new int[3] {anyo, idTipo, idCiudad});
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            await client.PostAsync(uri, content);
         }
 
 

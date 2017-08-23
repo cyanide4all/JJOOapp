@@ -33,7 +33,7 @@ namespace JJOOxamarin
 
         private async void NuevaSede(object sender, EventArgs e)
         {
-            //TODO
+            await Navigation.PushAsync(new NuevaSede());
         }
         private async void OnDelete(object sender, EventArgs e)
         {
